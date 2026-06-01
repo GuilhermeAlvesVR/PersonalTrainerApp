@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
+    x:Class="PersonalTrainerApp.Views.AlunoDetalhesPage"
+    Title="Dados do Aluno"
+    BackgroundColor="#111827">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30"
+            Spacing="22"
+            MaximumWidthRequest="1000">
+
+            <Button
+                Text="Voltar"
+                BackgroundColor="#1E293B"
+                TextColor="White"
+                WidthRequest="150"
+                HeightRequest="44"
+                CornerRadius="22"
+                FontAttributes="Bold"
+                HorizontalOptions="Start"
+                Clicked="Fechar"/>
+
+            <Label
+                Text="{Binding Nome}"
+                FontSize="34"
+                FontAttributes="Bold"
+                TextColor="White"/>
+
+            <Border
+                BackgroundColor="#0F172A"
+                Stroke="#1E293B"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 20"
+                Padding="18">
+
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="{Binding Idade, StringFormat='Idade: {0} anos'}" TextColor="White"/>
+                    <Label Text="{Binding Altura, StringFormat='Altura: {0} m'}" TextColor="White"/>
+                    <Label Text="{Binding Objetivo, StringFormat='Objetivo: {0}'}" TextColor="#D1D5DB"/>
+                    <Label Text="{Binding Observacoes, StringFormat='Observações: {0}'}" TextColor="#D1D5DB"/>
+                </VerticalStackLayout>
+            </Border>
+            <Button
+    Text="Editar aluno"
+    BackgroundColor="#4ADE80"
+    TextColor="#0B0F19"
+    WidthRequest="190"
+    HeightRequest="50"
+    CornerRadius="16"
+    FontAttributes="Bold"
+    HorizontalOptions="Start"
+    Clicked="EditarAluno"/> 
+
+            <Button
+                x:Name="BotaoAvaliacao"
+                Text="Nova avaliação"
+                BackgroundColor="#2563EB"
+                TextColor="White"
+                WidthRequest="190"
+                HeightRequest="50"
+                CornerRadius="16"
+                FontAttributes="Bold"
+                HorizontalOptions="Start"
+                Clicked="AbrirAvaliacao"/>
+
+            <Label
+                Text="Última avaliação"
+                FontSize="24"
+                FontAttributes="Bold"
+                TextColor="White"/>
+
+            <Border
+                BackgroundColor="#0F172A"
+                Stroke="#1E293B"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 20"
+                Padding="18">
+
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="{Binding UltimaAvaliacao.Data, StringFormat='Data: {0:dd/MM/yyyy}'}" FontAttributes="Bold" TextColor="White"/>
+                    <Label Text="{Binding UltimaAvaliacao.Peso, StringFormat='Peso: {0} kg'}" TextColor="#D1D5DB"/>
+                    <Label Text="{Binding UltimaAvaliacao.Cintura, StringFormat='Cintura: {0} cm'}" TextColor="#D1D5DB"/>
+                    <Label Text="{Binding UltimaAvaliacao.Abdomen, StringFormat='Abdômen: {0} cm'}" TextColor="#D1D5DB"/>
+                    <Label Text="{Binding UltimaAvaliacao.Braco, StringFormat='Braço: {0} cm'}" TextColor="#D1D5DB"/>
+                    <Label Text="{Binding UltimaAvaliacao.Coxa, StringFormat='Coxa: {0} cm'}" TextColor="#D1D5DB"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <Button
+                Text="Ver histórico de avaliações"
+                BackgroundColor="#1E293B"
+                TextColor="White"
+                WidthRequest="260"
+                HeightRequest="50"
+                CornerRadius="16"
+                FontAttributes="Bold"
+                HorizontalOptions="Start"
+                Clicked="AbrirHistoricoAvaliacoes"/>
+
+            <Label
+                Text="Evolução de peso"
+                FontSize="24"
+                FontAttributes="Bold"
+                TextColor="White"/>
+
+            <Border
+                BackgroundColor="#0F172A"
+                Stroke="#1E293B"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 20"
+                Padding="18">
+
+                <VerticalStackLayout Spacing="10">
+
+                    <Label
+                        Text="{Binding EvolucaoPesoTexto}"
+                        FontSize="18"
+                        TextColor="#D1D5DB"/>
+
+                    <lvc:CartesianChart
+                        x:Name="GraficoPeso"
+                        HeightRequest="180"/>
+
+                    <Label
+                        x:Name="PesoSelecionadoLabel"
+                        Text="Último peso"
+                        FontSize="16"
+                        TextColor="#9CA3AF"/>
+
+                </VerticalStackLayout>
+            </Border>
+
+            <Label
+                Text="Evolução das medidas"
+                FontSize="24"
+                FontAttributes="Bold"
+                TextColor="White"/>
+
+            <Grid
+                ColumnDefinitions="*,*"
+                RowDefinitions="Auto,Auto,Auto"
+                ColumnSpacing="14"
+                RowSpacing="14">
+
+                <Border Grid.Row="0" Grid.Column="0" BackgroundColor="#0F172A" Stroke="#1E293B" StrokeThickness="1" StrokeShape="RoundRectangle 18" Padding="18">
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Peito" FontAttributes="Bold" FontSize="18" TextColor="White"/>
+                        <Label Text="{Binding UltimaAvaliacao.Peito, StringFormat='{0} cm'}" FontSize="20" TextColor="#D1D5DB"/>
+                        <Label Text="{Binding EvolucaoPeitoTexto}" TextColor="#4ADE80"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Grid.Row="0" Grid.Column="1" BackgroundColor="#0F172A" Stroke="#1E293B" StrokeThickness="1" StrokeShape="RoundRectangle 18" Padding="18">
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Cintura" FontAttributes="Bold" FontSize="18" TextColor="White"/>
+                        <Label Text="{Binding UltimaAvaliacao.Cintura, StringFormat='{0} cm'}" FontSize="20" TextColor="#D1D5DB"/>
+                        <Label Text="{Binding EvolucaoCinturaTexto}" TextColor="#4ADE80"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="0" BackgroundColor="#0F172A" Stroke="#1E293B" StrokeThickness="1" StrokeShape="RoundRectangle 18" Padding="18">
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Abdômen" FontAttributes="Bold" FontSize="18" TextColor="White"/>
+                        <Label Text="{Binding UltimaAvaliacao.Abdomen, StringFormat='{0} cm'}" FontSize="20" TextColor="#D1D5DB"/>
+                        <Label Text="{Binding EvolucaoAbdomenTexto}" TextColor="#4ADE80"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="1" BackgroundColor="#0F172A" Stroke="#1E293B" StrokeThickness="1" StrokeShape="RoundRectangle 18" Padding="18">
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Quadril" FontAttributes="Bold" FontSize="18" TextColor="White"/>
+                        <Label Text="{Binding UltimaAvaliacao.Quadril, StringFormat='{0} cm'}" FontSize="20" TextColor="#D1D5DB"/>
+                        <Label Text="{Binding EvolucaoQuadrilTexto}" TextColor="#4ADE80"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Grid.Row="2" Grid.Column="0" BackgroundColor="#0F172A" Stroke="#1E293B" StrokeThickness="1" StrokeShape="RoundRectangle 18" Padding="18">
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Braço" FontAttributes="Bold" FontSize="18" TextColor="White"/>
+                        <Label Text="{Binding UltimaAvaliacao.Braco, StringFormat='{0} cm'}" FontSize="20" TextColor="#D1D5DB"/>
+                        <Label Text="{Binding EvolucaoBracoTexto}" TextColor="#4ADE80"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Grid.Row="2" Grid.Column="1" BackgroundColor="#0F172A" Stroke="#1E293B" StrokeThickness="1" StrokeShape="RoundRectangle 18" Padding="18">
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Coxa" FontAttributes="Bold" FontSize="18" TextColor="White"/>
+                        <Label Text="{Binding UltimaAvaliacao.Coxa, StringFormat='{0} cm'}" FontSize="20" TextColor="#D1D5DB"/>
+                        <Label Text="{Binding EvolucaoCoxaTexto}" TextColor="#4ADE80"/>
+                    </VerticalStackLayout>
+                </Border>
+
+            </Grid>
+
+            <Label
+                Text="Treinos"
+                FontSize="24"
+                FontAttributes="Bold"
+                TextColor="White"/>
+
+            <HorizontalStackLayout Spacing="10">
+
+                <Button
+                    Text="Novo treino"
+                    BackgroundColor="#2563EB"
+                    TextColor="White"
+                    WidthRequest="160"
+                    HeightRequest="50"
+                    CornerRadius="16"
+                    FontAttributes="Bold"
+                    Clicked="NovoTreino"/>
+
+                <Button
+                    Text="Editar treino"
+                    BackgroundColor="#1E293B"
+                    TextColor="White"
+                    WidthRequest="160"
+                    HeightRequest="50"
+                    CornerRadius="16"
+                    FontAttributes="Bold"
+                    Clicked="EditarTreinos"/>
+
+            </HorizontalStackLayout>
+
+            <CollectionView x:Name="TreinosCollection">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border
+                            BackgroundColor="#0F172A"
+                            Stroke="#1E293B"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 18"
+                            Padding="18"
+                            Margin="0,0,0,14">
+
+                            <VerticalStackLayout Spacing="5">
+                                <Label
+                                    Text="{Binding LetraTreino, StringFormat='Treino {0}'}"
+                                    FontSize="20"
+                                    FontAttributes="Bold"
+                                    TextColor="White"/>
+
+                                <Label
+                                    Text="{Binding NomeTreino}"
+                                    TextColor="#D1D5DB"/>
+                            </VerticalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button
+                Text="Excluir aluno"
+                BackgroundColor="#EF4444"
+                TextColor="White"
+                WidthRequest="160"
+                HeightRequest="50"
+                CornerRadius="16"
+                FontAttributes="Bold"
+                HorizontalOptions="Start"
+                Clicked="ExcluirAluno"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

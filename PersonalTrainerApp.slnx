@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="PersonalTrainerApi/PersonalTrainerApi.csproj" />
+  <Project Path="PersonalTrainerApp/PersonalTrainerApp.csproj">
+    <Deploy />
+  </Project>
+</Solution>

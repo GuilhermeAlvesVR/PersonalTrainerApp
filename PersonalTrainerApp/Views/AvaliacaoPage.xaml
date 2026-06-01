@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="PersonalTrainerApp.Views.AvaliacaoPage"
+    Title="Avaliação Física"
+    BackgroundColor="#111827">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="22" MaximumWidthRequest="1000">
+
+            <Label
+                Text="Avaliação Física"
+                FontSize="34"
+                FontAttributes="Bold"
+                TextColor="White"/>
+
+            <Button
+                Text="Voltar"
+                BackgroundColor="#1E293B"
+                TextColor="White"
+                WidthRequest="150"
+                HeightRequest="44"
+                CornerRadius="22"
+                FontAttributes="Bold"
+                HorizontalOptions="Start"
+                Clicked="Voltar"/>
+
+            <Border
+                BackgroundColor="#0F172A"
+                Stroke="#1E293B"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 22"
+                Padding="22">
+
+                <VerticalStackLayout Spacing="14">
+
+                    <Label
+                        Text="Dados principais"
+                        FontSize="22"
+                        FontAttributes="Bold"
+                        TextColor="White"/>
+
+                    <Entry
+                        x:Name="PesoEntry"
+                        Placeholder="Peso atual (kg)"
+                        Keyboard="Numeric"
+                        BackgroundColor="#111827"
+                        TextColor="White"
+                        PlaceholderColor="#9CA3AF"
+                        HeightRequest="52"/>
+
+                </VerticalStackLayout>
+            </Border>
+
+            <Border
+                BackgroundColor="#0F172A"
+                Stroke="#1E293B"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 22"
+                Padding="22">
+
+                <VerticalStackLayout Spacing="14">
+
+                    <Label
+                        Text="Medidas corporais"
+                        FontSize="22"
+                        FontAttributes="Bold"
+                        TextColor="White"/>
+
+                    <Grid
+    ColumnDefinitions="*,*"
+    RowDefinitions="Auto,Auto,Auto"
+    ColumnSpacing="12"
+    RowSpacing="12">
+
+                        <Entry x:Name="PeitoEntry" Placeholder="Peito (cm)" Keyboard="Numeric"
+           BackgroundColor="#111827" TextColor="White" PlaceholderColor="#9CA3AF" HeightRequest="52"/>
+
+                        <Entry x:Name="CinturaEntry" Grid.Column="1" Placeholder="Cintura (cm)" Keyboard="Numeric"
+           BackgroundColor="#111827" TextColor="White" PlaceholderColor="#9CA3AF" HeightRequest="52"/>
+
+                        <Entry x:Name="AbdomenEntry" Grid.Row="1" Placeholder="Abdômen (cm)" Keyboard="Numeric"
+           BackgroundColor="#111827" TextColor="White" PlaceholderColor="#9CA3AF" HeightRequest="52"/>
+
+                        <Entry x:Name="QuadrilEntry" Grid.Row="1" Grid.Column="1" Placeholder="Quadril (cm)" Keyboard="Numeric"
+           BackgroundColor="#111827" TextColor="White" PlaceholderColor="#9CA3AF" HeightRequest="52"/>
+
+                        <Entry x:Name="BracoEntry" Grid.Row="2" Placeholder="Braço (cm)" Keyboard="Numeric"
+           BackgroundColor="#111827" TextColor="White" PlaceholderColor="#9CA3AF" HeightRequest="52"/>
+
+                        <Entry x:Name="CoxaEntry" Grid.Row="2" Grid.Column="1" Placeholder="Coxa (cm)" Keyboard="Numeric"
+           BackgroundColor="#111827" TextColor="White" PlaceholderColor="#9CA3AF" HeightRequest="52"/>
+
+                    </Grid>
+
+                </VerticalStackLayout>
+            </Border>
+
+            <Border
+                BackgroundColor="#0F172A"
+                Stroke="#1E293B"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 22"
+                Padding="22">
+
+                <VerticalStackLayout Spacing="14">
+
+                    <Label
+                        Text="Observações"
+                        FontSize="22"
+                        FontAttributes="Bold"
+                        TextColor="White"/>
+
+                    <Editor
+                        x:Name="ObservacoesEditor"
+                        Placeholder="Observações da avaliação"
+                        BackgroundColor="#111827"
+                        TextColor="White"
+                        PlaceholderColor="#9CA3AF"
+                        AutoSize="TextChanges"
+                        HeightRequest="120"/>
+
+                </VerticalStackLayout>
+            </Border>
+
+            <Button
+                Text="Salvar avaliação"
+                BackgroundColor="#4ADE80"
+                TextColor="#0B0F19"
+                WidthRequest="220"
+                HeightRequest="50"
+                CornerRadius="24"
+                FontAttributes="Bold"
+                HorizontalOptions="Start"
+                Clicked="SalvarAvaliacao"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

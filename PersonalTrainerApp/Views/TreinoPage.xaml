@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="PersonalTrainerApp.Views.TreinoPage"
+    Title="Editar Treino"
+    BackgroundColor="#111827">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="22" MaximumWidthRequest="1000">
+
+            <Label Text="Editar treino" FontSize="34" FontAttributes="Bold" TextColor="White"/>
+
+            <Button Text="Voltar" BackgroundColor="#1E293B" TextColor="White"
+                    WidthRequest="150" HeightRequest="44" CornerRadius="22"
+                    FontAttributes="Bold" HorizontalOptions="Start"
+                    Clicked="VoltarPagina"/>
+
+            <Border BackgroundColor="#0F172A" Stroke="#1E293B" StrokeThickness="1"
+                    StrokeShape="RoundRectangle 22" Padding="22">
+
+                <VerticalStackLayout Spacing="16">
+
+                    <Picker x:Name="LetraTreinoPicker" Title="Selecione o treino"
+                            BackgroundColor="#111827" TextColor="White"
+                            SelectedIndexChanged="TrocarTreinoSelecionado">
+                        <Picker.Items>
+                            <x:String>A</x:String>
+                            <x:String>B</x:String>
+                            <x:String>C</x:String>
+                            <x:String>D</x:String>
+                        </Picker.Items>
+                    </Picker>
+
+                    <Entry x:Name="NomeTreinoEntry"
+                           Placeholder="Nome do treino. Ex: Peito e tríceps"
+                           BackgroundColor="#111827"
+                           TextColor="White"
+                           PlaceholderColor="#9CA3AF"
+                           HeightRequest="52"/>
+
+                </VerticalStackLayout>
+            </Border>
+
+            <Label Text="Adicionar exercício" FontSize="24" FontAttributes="Bold" TextColor="White"/>
+
+            <Border BackgroundColor="#0F172A" Stroke="#1E293B" StrokeThickness="1"
+                    StrokeShape="RoundRectangle 22" Padding="22">
+
+                <VerticalStackLayout Spacing="14">
+
+                    <Entry x:Name="NomeExercicioEntry" Placeholder="Nome do exercício"
+                           BackgroundColor="#111827" TextColor="White"
+                           PlaceholderColor="#9CA3AF" HeightRequest="52"/>
+
+                    <Grid ColumnDefinitions="*,*,*" ColumnSpacing="12">
+                        <Entry x:Name="SeriesEntry" Placeholder="Séries" Keyboard="Numeric"
+                               BackgroundColor="#111827" TextColor="White"
+                               PlaceholderColor="#9CA3AF" HeightRequest="52"/>
+
+                        <Entry x:Name="RepeticoesEntry" Grid.Column="1" Placeholder="Repetições" Keyboard="Numeric"
+                               BackgroundColor="#111827" TextColor="White"
+                               PlaceholderColor="#9CA3AF" HeightRequest="52"/>
+
+                        <Entry x:Name="CargaEntry" Grid.Column="2" Placeholder="Carga. Ex: 40kg"
+                               BackgroundColor="#111827" TextColor="White"
+                               PlaceholderColor="#9CA3AF" HeightRequest="52"/>
+                    </Grid>
+
+                    <Button Text="Adicionar exercício"
+                            BackgroundColor="#2563EB"
+                            TextColor="White"
+                            WidthRequest="220"
+                            HeightRequest="48"
+                            CornerRadius="22"
+                            FontAttributes="Bold"
+                            HorizontalOptions="Start"
+                            Clicked="AdicionarExercicio"/>
+
+                </VerticalStackLayout>
+            </Border>
+
+            <Label Text="Exercícios cadastrados" FontSize="24" FontAttributes="Bold" TextColor="White"/>
+
+            <CollectionView x:Name="ListaExercicios">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BackgroundColor="#0F172A" Stroke="#1E293B" StrokeThickness="1"
+                                StrokeShape="RoundRectangle 18" Padding="14" Margin="0,0,0,10">
+
+                            <Grid ColumnDefinitions="2*,*,*,*,Auto,Auto" ColumnSpacing="10">
+
+                                <Label Text="{Binding Nome}" TextColor="White" FontSize="15" VerticalOptions="Center"/>
+
+                                <Label Grid.Column="1" Text="{Binding Series}" TextColor="#D1D5DB"
+                                       HorizontalTextAlignment="Center" VerticalOptions="Center"/>
+
+                                <Label Grid.Column="2" Text="{Binding Repeticoes}" TextColor="#D1D5DB"
+                                       HorizontalTextAlignment="Center" VerticalOptions="Center"/>
+
+                                <Label Grid.Column="3" Text="{Binding Carga}" TextColor="#D1D5DB"
+                                       HorizontalTextAlignment="Center" VerticalOptions="Center"/>
+
+                                <Button Grid.Column="4" Text="Editar"
+                                        WidthRequest="80" HeightRequest="38"
+                                        CornerRadius="19"
+                                        BackgroundColor="#4ADE80"
+                                        TextColor="#0B0F19"
+                                        FontAttributes="Bold"
+                                        Clicked="EditarExercicio"/>
+
+                                <Button Grid.Column="5" Text="X"
+                                        WidthRequest="38" HeightRequest="38"
+                                        CornerRadius="19"
+                                        BackgroundColor="#EF4444"
+                                        TextColor="White"
+                                        Clicked="RemoverExercicio"/>
+
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button Text="Salvar treino"
+                    BackgroundColor="#4ADE80"
+                    TextColor="#0B0F19"
+                    WidthRequest="220"
+                    HeightRequest="50"
+                    CornerRadius="24"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Start"
+                    Clicked="SalvarTreino"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

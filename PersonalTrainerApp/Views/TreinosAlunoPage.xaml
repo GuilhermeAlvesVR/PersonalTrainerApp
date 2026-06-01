@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="PersonalTrainerApp.Views.TreinosAlunoPage"
+    Title="Treinos do Aluno"
+    BackgroundColor="#111827">
+
+    <ScrollView>
+
+        <VerticalStackLayout
+            Padding="30"
+            Spacing="22"
+            MaximumWidthRequest="1000">
+
+            <Label
+                Text="Treinos do aluno"
+                FontSize="34"
+                FontAttributes="Bold"
+                TextColor="White"/>
+
+            <Button
+                Text="Voltar"
+                BackgroundColor="#1E293B"
+                TextColor="White"
+                WidthRequest="150"
+                HeightRequest="44"
+                CornerRadius="22"
+                FontAttributes="Bold"
+                HorizontalOptions="Start"
+                Clicked="Fechar"/>
+
+            <CollectionView x:Name="TreinosCollection">
+
+                <CollectionView.ItemTemplate>
+
+                    <DataTemplate>
+
+                        <Border
+                            BackgroundColor="#0F172A"
+                            Stroke="#1E293B"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 22"
+                            Padding="20"
+                            Margin="0,0,0,16">
+
+                            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="16">
+
+                                <Border
+                                    WidthRequest="54"
+                                    HeightRequest="54"
+                                    BackgroundColor="#4ADE80"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 27"
+                                    VerticalOptions="Center">
+
+                                    <Label
+                                        Text="{Binding LetraTreino}"
+                                        TextColor="#0B0F19"
+                                        FontSize="22"
+                                        FontAttributes="Bold"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center"/>
+
+                                </Border>
+
+                                <VerticalStackLayout
+                                    Grid.Column="1"
+                                    Spacing="4"
+                                    VerticalOptions="Center">
+
+                                    <Label
+                                        Text="{Binding LetraTreino, StringFormat='Treino {0}'}"
+                                        FontSize="22"
+                                        FontAttributes="Bold"
+                                        TextColor="White"/>
+
+                                    <Label
+                                        Text="{Binding NomeTreino}"
+                                        FontSize="15"
+                                        TextColor="#9CA3AF"/>
+
+                                </VerticalStackLayout>
+
+                                <HorizontalStackLayout
+                                    Grid.Column="2"
+                                    Spacing="10"
+                                    VerticalOptions="Center">
+
+                                    <Button
+                                        Text="Abrir"
+                                        BackgroundColor="#2563EB"
+                                        TextColor="White"
+                                        WidthRequest="100"
+                                        HeightRequest="42"
+                                        CornerRadius="21"
+                                        FontAttributes="Bold"
+                                        Clicked="AbrirTreino"/>
+
+                                    <Button
+                                        Text="Editar"
+                                        BackgroundColor="#4ADE80"
+                                        TextColor="#0B0F19"
+                                        WidthRequest="100"
+                                        HeightRequest="42"
+                                        CornerRadius="21"
+                                        FontAttributes="Bold"
+                                        Clicked="EditarTreino"/>
+
+                                    <Button
+                                        Text="Excluir"
+                                        BackgroundColor="#EF4444"
+                                        TextColor="White"
+                                        WidthRequest="100"
+                                        HeightRequest="42"
+                                        CornerRadius="21"
+                                        FontAttributes="Bold"
+                                        Clicked="ExcluirTreino"/>
+
+                                </HorizontalStackLayout>
+
+                            </Grid>
+
+                        </Border>
+
+                    </DataTemplate>
+
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+
+</ContentPage>

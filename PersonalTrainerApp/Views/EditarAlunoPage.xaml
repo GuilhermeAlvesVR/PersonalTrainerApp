@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="PersonalTrainerApp.Views.EditarAlunoPage"
+    Title="Editar Aluno"
+    BackgroundColor="#111827">
+
+    <ScrollView>
+
+        <VerticalStackLayout
+            Padding="20"
+            Spacing="12">
+
+            <Label
+                Text="Editar aluno"
+                FontSize="26"
+                FontAttributes="Bold"
+                TextColor="White"/>
+
+            <Entry
+                Placeholder="Nome"
+                Text="{Binding Nome}"
+                TextColor="White"
+                PlaceholderColor="#9CA3AF"/>
+
+            <Entry
+                Placeholder="Idade"
+                Text="{Binding Idade}"
+                Keyboard="Numeric"
+                TextColor="White"
+                PlaceholderColor="#9CA3AF"/>
+
+            <Entry
+                Placeholder="Peso"
+                Text="{Binding Peso}"
+                Keyboard="Numeric"
+                TextColor="White"
+                PlaceholderColor="#9CA3AF"/>
+
+            <Entry
+                Placeholder="Altura"
+                Text="{Binding Altura}"
+                Keyboard="Numeric"
+                TextColor="White"
+                PlaceholderColor="#9CA3AF"/>
+
+            <Entry
+                Placeholder="Objetivo"
+                Text="{Binding Objetivo}"
+                TextColor="White"
+                PlaceholderColor="#9CA3AF"/>
+
+            <Editor
+                Placeholder="Observações"
+                Text="{Binding Observacoes}"
+                HeightRequest="120"
+                TextColor="White"
+                PlaceholderColor="#9CA3AF"/>
+
+            <HorizontalStackLayout
+                Spacing="10"
+                Margin="0,15,0,0">
+
+                <Button
+                    Text="Salvar"
+                    BackgroundColor="#4ADE80"
+                    TextColor="#0B0F19"
+                    Clicked="Salvar"
+                    HorizontalOptions="FillAndExpand"/>
+
+                <Button
+                    Text="Cancelar"
+                    BackgroundColor="#EF4444"
+                    TextColor="White"
+                    Clicked="Cancelar"
+                    HorizontalOptions="FillAndExpand"/>
+
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+
+</ContentPage>

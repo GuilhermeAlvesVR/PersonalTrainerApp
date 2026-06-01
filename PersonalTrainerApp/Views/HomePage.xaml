@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:PersonalTrainerApp.Converters"
+    x:Class="PersonalTrainerApp.Views.HomePage"
+    Title="Studio Tatiane Oliveira">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:InverseBoolConverter x:Key="InverseBoolConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid
+    ColumnDefinitions="220,220,*"
+    BackgroundColor="#111827">
+
+        <!-- TODOS OS ALUNOS -->
+        <Grid
+    Grid.Column="0"
+    BackgroundColor="#0F172A"
+    Padding="14"
+    RowDefinitions="Auto,Auto,Auto,*"
+    RowSpacing="14">
+
+            <Image
+        Grid.Row="0"
+        Source="logo.jpeg"
+        HeightRequest="90"
+        WidthRequest="180"
+        Aspect="AspectFit"
+        HorizontalOptions="Center"/>
+
+            <Label
+        Grid.Row="1"
+        Text="Todos os alunos"
+        FontSize="20"
+        TextColor="White"
+        FontAttributes="Bold"/>
+
+            <Grid
+        Grid.Row="2"
+        ColumnDefinitions="*,Auto"
+        ColumnSpacing="10">
+
+                <SearchBar
+            x:Name="BuscaAluno"
+            Grid.Column="0"
+            Placeholder="Pesquisar aluno"
+            BackgroundColor="#1E293B"
+            TextColor="White"
+            PlaceholderColor="#9CA3AF"
+            CancelButtonColor="#4ADE80"
+            TextChanged="BuscarAluno"/>
+
+                <Button
+            Grid.Column="1"
+            Text="+"
+            WidthRequest="48"
+            HeightRequest="48"
+            CornerRadius="24"
+            FontSize="24"
+            BackgroundColor="#4ADE80"
+            TextColor="#0B0F19"
+            Clicked="AdicionarAluno"/>
+            </Grid>
+
+            <CollectionView
+        Grid.Row="3"
+        x:Name="ListaAlunos"
+        SelectionMode="Single"
+        SelectionChanged="SelecionarAlunoGeral">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame
+                    Padding="12"
+                    Margin="0,5"
+                    CornerRadius="14"
+                    BackgroundColor="#111827"
+                    BorderColor="#1E293B"
+                    HasShadow="False">
+
+                            <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10">
+
+                                <Label
+                            Text="{Binding Nome}"
+                            TextColor="White"
+                            FontSize="16"
+                            VerticalOptions="Center"/>
+
+                                <Button
+                            Grid.Column="1"
+                            Text="▶"
+                            WidthRequest="42"
+                            HeightRequest="42"
+                            CornerRadius="21"
+                            BackgroundColor="#4ADE80"
+                            TextColor="#0B0F19"
+                            FontSize="16"
+                            FontAttributes="Bold"
+                            Clicked="AdicionarAlunoTreinando"/>
+
+                                <Button
+                            Grid.Column="2"
+                            Text="i"
+                            WidthRequest="42"
+                            HeightRequest="42"
+                            CornerRadius="21"
+                            BackgroundColor="#1E293B"
+                            TextColor="White"
+                            FontSize="15"
+                            FontAttributes="Bold"
+                            Clicked="VerDadosAluno"/>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+
+        <!-- TREINANDO AGORA -->
+        <VerticalStackLayout
+        Grid.Column="1"
+        BackgroundColor="#111827"
+        Padding="14"
+        Spacing="14">
+
+            <Label
+            Text="Treinando agora"
+            FontSize="20"
+            TextColor="White"
+            FontAttributes="Bold"/>
+
+            <CollectionView
+            x:Name="ListaAlunosTreinando"
+            ItemsSource="{Binding AlunosTreinando}"
+            SelectionMode="Single"
+            SelectionChanged="SelecionarAlunoTreinando">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+
+                        <Frame
+                        Padding="12"
+                        Margin="0,5"
+                        CornerRadius="14"
+                        BackgroundColor="#0F172A"
+                        BorderColor="#1E293B"
+                        HasShadow="False">
+
+                            <Grid ColumnDefinitions="*,Auto,Auto">
+
+                                <VerticalStackLayout Spacing="2">
+                                    <Label
+                                    Text="{Binding Nome}"
+                                    TextColor="White"
+                                    FontSize="16"
+                                    FontAttributes="Bold"/>
+
+                                    <Label
+                                    Text="Em treino"
+                                    TextColor="#9CA3AF"
+                                    FontSize="12"/>
+                                </VerticalStackLayout>
+                                <Button
+    Grid.Column="1"
+    Text="Ver"
+    WidthRequest="26"
+    HeightRequest="26"
+    CornerRadius="13"
+    FontSize="10"
+    Padding="0"
+    BackgroundColor="#4ADE80"
+    TextColor="#0B0F19"
+    Clicked="AbrirFichaAluno"/>
+
+                                <Button
+    Grid.Column="2"
+    Text="X"
+    WidthRequest="26"
+    HeightRequest="26"
+    CornerRadius="13"
+    FontSize="10"
+    Padding="0"
+    BackgroundColor="#EF4444"
+    TextColor="White"
+    Clicked="RemoverAlunoTreinando"/>
+
+                            </Grid>
+
+                        </Frame>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+        </VerticalStackLayout>
+
+        <!-- ÁREA PRINCIPAL -->
+        <ScrollView
+            Grid.Column="2"
+            IsVisible="{Binding NaoEhCelular}">
+            <VerticalStackLayout
+                Padding="25"
+                Spacing="20">
+
+                <Grid ColumnDefinitions="*,Auto">
+                    <Label
+                        Text="Ficha do aluno"
+                        FontSize="28"
+                        FontAttributes="Bold"
+                        VerticalOptions="Center"/>
+
+                    <Frame
+                        x:Name="MensagemSucesso"
+                        Grid.Column="1"
+                        IsVisible="False"
+                        BackgroundColor="#2E7D32"
+                        CornerRadius="10"
+                        Padding="12"
+                        HorizontalOptions="End"
+                        VerticalOptions="Center">
+
+                        <Label
+                            Text="Treino salvo no histórico."
+                            TextColor="White"
+                            FontSize="14"/>
+                    </Frame>
+                </Grid>
+
+                <Frame
+    Padding="22"
+    CornerRadius="18"
+    BorderColor="#1F2937"
+    BackgroundColor="#0B0F19"
+    HasShadow="True"
+    IsVisible="{Binding TemAlunoSelecionado}">
+
+                    <VerticalStackLayout
+        Spacing="18"
+        BindingContext="{Binding AlunoSelecionadoAtual}">
+
+                        <Grid ColumnDefinitions="*,Auto">
+
+                            <VerticalStackLayout Grid.Column="0" Spacing="6">
+
+                                <Label
+                    Text="{Binding Nome}"
+                    FontSize="28"
+                    FontAttributes="Bold"
+                    TextColor="White"/>
+
+                                <Label
+                    Text="{Binding TreinoSelecionado.NomeTreino}"
+                    FontSize="18"
+                    TextColor="#9CA3AF"/>
+
+                                
+                                <HorizontalStackLayout Spacing="10">
+
+                                    <Button
+                        Text="A"
+                        WidthRequest="42"
+                        HeightRequest="42"
+                        CornerRadius="21"
+                        FontSize="14"
+                        Padding="0"
+                        Clicked="SelecionarTreinoA"
+                        IsVisible="{Binding TemTreinoA}">
+                                        <Button.Triggers>
+                                            <DataTrigger TargetType="Button" Binding="{Binding TreinoASelecionado}" Value="True">
+                                                <Setter Property="BackgroundColor" Value="#4ADE80"/>
+                                                <Setter Property="TextColor" Value="#0B0F19"/>
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Button" Binding="{Binding TreinoASelecionado}" Value="False">
+                                                <Setter Property="BackgroundColor" Value="#1F2937"/>
+                                                <Setter Property="TextColor" Value="White"/>
+                                            </DataTrigger>
+                                        </Button.Triggers>
+                                    </Button>
+
+                                    <Button
+                        Text="B"
+                        WidthRequest="42"
+                        HeightRequest="42"
+                        CornerRadius="21"
+                        FontSize="14"
+                        Padding="0"
+                        Clicked="SelecionarTreinoB"
+                        IsVisible="{Binding TemTreinoB}">
+                                        <Button.Triggers>
+                                            <DataTrigger TargetType="Button" Binding="{Binding TreinoBSelecionado}" Value="True">
+                                                <Setter Property="BackgroundColor" Value="#4ADE80"/>
+                                                <Setter Property="TextColor" Value="#0B0F19"/>
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Button" Binding="{Binding TreinoBSelecionado}" Value="False">
+                                                <Setter Property="BackgroundColor" Value="#1F2937"/>
+                                                <Setter Property="TextColor" Value="White"/>
+                                            </DataTrigger>
+                                        </Button.Triggers>
+                                    </Button>
+
+                                    <Button
+                        Text="C"
+                        WidthRequest="42"
+                        HeightRequest="42"
+                        CornerRadius="21"
+                        FontSize="14"
+                        Padding="0"
+                        Clicked="SelecionarTreinoC"
+                        IsVisible="{Binding TemTreinoC}">
+                                        <Button.Triggers>
+                                            <DataTrigger TargetType="Button" Binding="{Binding TreinoCSelecionado}" Value="True">
+                                                <Setter Property="BackgroundColor" Value="#4ADE80"/>
+                                                <Setter Property="TextColor" Value="#0B0F19"/>
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Button" Binding="{Binding TreinoCSelecionado}" Value="False">
+                                                <Setter Property="BackgroundColor" Value="#1F2937"/>
+                                                <Setter Property="TextColor" Value="White"/>
+                                            </DataTrigger>
+                                        </Button.Triggers>
+                                    </Button>
+
+                                    <Button
+                        Text="D"
+                        WidthRequest="42"
+                        HeightRequest="42"
+                        CornerRadius="21"
+                        FontSize="14"
+                        Padding="0"
+                        Clicked="SelecionarTreinoD"
+                        IsVisible="{Binding TemTreinoD}">
+                                        <Button.Triggers>
+                                            <DataTrigger TargetType="Button" Binding="{Binding TreinoDSelecionado}" Value="True">
+                                                <Setter Property="BackgroundColor" Value="#4ADE80"/>
+                                                <Setter Property="TextColor" Value="#0B0F19"/>
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Button" Binding="{Binding TreinoDSelecionado}" Value="False">
+                                                <Setter Property="BackgroundColor" Value="#1F2937"/>
+                                                <Setter Property="TextColor" Value="White"/>
+                                            </DataTrigger>
+                                        </Button.Triggers>
+                                    </Button>
+
+                                    <Button
+                        Text="Salvar"
+                        Clicked="SalvarTreinoFeito"
+                        BackgroundColor="#166534"
+                        TextColor="White"
+                        WidthRequest="90"
+                        HeightRequest="42"
+                        CornerRadius="21"/>
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+
+
+                            <VerticalStackLayout
+    Grid.Column="1"
+    Spacing="10"
+    VerticalOptions="Start">
+
+                                <Button
+        Text="Editar"
+        BackgroundColor="#4ADE80"
+        TextColor="#0B0F19"
+        Clicked="EditarTreino"
+        HeightRequest="42"
+        WidthRequest="120"
+        FontSize="15"
+        CornerRadius="21"/>
+
+                                <Border
+        BackgroundColor="#111827"
+        Stroke="#1F2937"
+        StrokeThickness="1"
+        Padding="10"
+        StrokeShape="RoundRectangle 12"
+        WidthRequest="220">
+
+                                    <VerticalStackLayout Spacing="3">
+
+                                        <Label
+                Text="Último treino"
+                FontSize="11"
+                TextColor="#9CA3AF"/>
+
+                                        <Label
+                Text="{Binding UltimoTreinoRealizado}"
+                FontSize="15"
+                TextColor="#4ADE80"
+                FontAttributes="Bold"/>
+
+                                    </VerticalStackLayout>
+
+                                </Border>
+
+                            </VerticalStackLayout>
+                        </Grid>
+
+                        <VerticalStackLayout IsVisible="{Binding TemTreino}" Spacing="8">
+
+                            <Grid ColumnDefinitions="2*,*,*,*" Padding="0,8,0,0">
+                                <Label Text="Exercício" FontAttributes="Bold" TextColor="#9CA3AF"/>
+                                <Label Grid.Column="1" Text="Séries" FontAttributes="Bold" TextColor="#9CA3AF" HorizontalTextAlignment="Center"/>
+                                <Label Grid.Column="2" Text="Rep." FontAttributes="Bold" TextColor="#9CA3AF" HorizontalTextAlignment="Center"/>
+                                <Label Grid.Column="3" Text="Carga" FontAttributes="Bold" TextColor="#9CA3AF" HorizontalTextAlignment="Center"/>
+                            </Grid>
+
+                            <CollectionView ItemsSource="{Binding TreinoSelecionado.Exercicios}">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border
+                            BackgroundColor="#0F172A"
+                            Stroke="#172033"
+                            StrokeThickness="1"
+                            Padding="12"
+                            Margin="0,4"
+                            StrokeShape="RoundRectangle 12">
+
+                                            <Grid ColumnDefinitions="2*,*,*,*">
+                                                <Label Text="{Binding Nome}" TextColor="White" FontSize="15"/>
+                                                <Label Grid.Column="1" Text="{Binding Series}" TextColor="White" HorizontalTextAlignment="Center"/>
+                                                <Label Grid.Column="2" Text="{Binding Repeticoes}" TextColor="White" HorizontalTextAlignment="Center"/>
+                                                <Label Grid.Column="3" Text="{Binding Carga}" TextColor="White" HorizontalTextAlignment="Center"/>
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout
+            IsVisible="{Binding SemTreino}"
+            Spacing="15"
+            Padding="0,20">
+
+                            <Label
+                Text="Nenhum treino cadastrado"
+                FontSize="18"
+                TextColor="#9CA3AF"/>
+
+                            <Button
+                Text="Criar treino"
+                BackgroundColor="#4ADE80"
+                TextColor="#0B0F19"
+                WidthRequest="180"
+                HeightRequest="45"
+                CornerRadius="22"
+                HorizontalOptions="Start"
+                Clicked="EditarTreino"/>
+                        </VerticalStackLayout>
+
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Label
+                    Text="Selecione um aluno na lista para visualizar o treino."
+                    FontSize="18"
+                    TextColor="Gray"
+                    IsVisible="{Binding TemAlunoSelecionado, Converter={StaticResource InverseBoolConverter}}"/>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
+
+</ContentPage>
