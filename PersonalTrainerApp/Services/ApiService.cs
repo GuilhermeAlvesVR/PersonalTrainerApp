@@ -1,13 +1,14 @@
-﻿    using System.Net.Http.Json;
-    using PersonalTrainerApp.Models;
+﻿using System.Net.Http.Json;
+using PersonalTrainerApp.Models;
 
-    namespace PersonalTrainerApp.Services;
+namespace PersonalTrainerApp.Services;
 
-    public class ApiService
-    {
-        private readonly HttpClient _httpClient;
+public class ApiService
+{
+    private readonly HttpClient _httpClient;
 
-        private const string BaseUrl = "http://192.168.15.186:5129/";
+    private const string BaseUrl =
+        "https://personaltrainerapp-myci.onrender.com/";
 
     public ApiService()
     {
@@ -16,6 +17,8 @@
             BaseAddress = new Uri(BaseUrl)
         };
     }
+
+    // ALUNOS
 
     // ALUNOS
     public async Task<List<Aluno>> GetAlunosAsync()
