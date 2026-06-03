@@ -20,6 +20,8 @@ public partial class AvaliacaoPage : ContentPage
     {
         try
         {
+           
+
             var avaliacao = new AvaliacaoFisica
             {
                 AlunoId = _aluno.Id,

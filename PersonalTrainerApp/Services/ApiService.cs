@@ -59,7 +59,12 @@ public class ApiService
         var response = await _httpClient.PostAsJsonAsync("api/Alunos", alunoApi);
 
         if (!response.IsSuccessStatusCode)
-            return null;
+        {
+            var erro = await response.Content.ReadAsStringAsync();
+
+            throw new Exception(
+                $"Status: {(int)response.StatusCode}\n{erro}");
+        }
 
         var salvo = await response.Content.ReadFromJsonAsync<AlunoApiDto>();
 
@@ -280,6 +285,7 @@ public class ApiService
         public double Abdomen { get; set; }
         public double Quadril { get; set; }
         public double Braco { get; set; }
+
         public double Coxa { get; set; }
 
         public string Observacoes { get; set; } = string.Empty;

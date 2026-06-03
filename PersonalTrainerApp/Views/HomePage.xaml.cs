@@ -58,16 +58,6 @@ public partial class HomePage : ContentPage
         {
             var alunosBanco = await _apiService.GetAlunosAsync();
 
-            foreach (var aluno in alunosBanco)
-            {
-                var treinos = await _apiService.GetTreinosAlunoAsync(aluno.Id);
-
-                aluno.Treinos = treinos;
-                aluno.TreinoSelecionado =
-                    treinos.FirstOrDefault(t => t.LetraTreino == "A")
-                    ?? treinos.FirstOrDefault();
-            }
-
             TodosAlunos = alunosBanco;
 
             ListaAlunos.ItemsSource = null;
@@ -138,6 +128,13 @@ public partial class HomePage : ContentPage
                     {
                         await DisplayAlert("Erro", "Não foi possível salvar o aluno na nuvem.", "OK");
                         return;
+                    }
+
+                    foreach (var treino in aluno.Treinos)
+                    {
+                        treino.AlunoId = alunoSalvo.Id;
+
+                        await _apiService.SalvarTreinoAsync(treino);
                     }
 
                     await CarregarAlunos();

@@ -13,32 +13,40 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <Grid
-    ColumnDefinitions="220,220,*"
-    BackgroundColor="#111827">
+    <Grid BackgroundColor="#111827">
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="{OnIdiom Phone=*, Tablet=300, Desktop=320}" />
+            <ColumnDefinition Width="{OnIdiom Phone=*, Tablet=280, Desktop=300}" />
+            <ColumnDefinition Width="{OnIdiom Phone=0, Tablet=*, Desktop=*}" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
         <!-- TODOS OS ALUNOS -->
         <Grid
     Grid.Column="0"
+    Grid.Row="0"
     BackgroundColor="#0F172A"
-    Padding="14"
+    Padding="20"
     RowDefinitions="Auto,Auto,Auto,*"
     RowSpacing="14">
 
             <Image
-        Grid.Row="0"
-        Source="logo.jpeg"
-        HeightRequest="90"
-        WidthRequest="180"
-        Aspect="AspectFit"
-        HorizontalOptions="Center"/>
-
+    Grid.Row="0"
+    Source="logo.jpeg"
+    HeightRequest="90"
+    WidthRequest="180"
+    Aspect="AspectFit"
+    HorizontalOptions="Center"
+    IsVisible="{OnIdiom Phone=False, Tablet=True, Desktop=True}" />
             <Label
-        Grid.Row="1"
-        Text="Todos os alunos"
-        FontSize="20"
-        TextColor="White"
-        FontAttributes="Bold"/>
+    Grid.Row="1"
+    Text="Todos os alunos"
+    FontSize="{OnIdiom Phone=16, Tablet=20, Desktop=20}"
+    TextColor="White"
+    FontAttributes="Bold"/>
 
             <Grid
         Grid.Row="2"
@@ -47,6 +55,7 @@
 
                 <SearchBar
             x:Name="BuscaAluno"
+            HeightRequest="{OnIdiom Phone=40, Tablet=56, Desktop=56}"
             Grid.Column="0"
             Placeholder="Pesquisar aluno"
             BackgroundColor="#1E293B"
@@ -76,27 +85,27 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame
-                    Padding="12"
-                    Margin="0,5"
-                    CornerRadius="14"
-                    BackgroundColor="#111827"
-                    BorderColor="#1E293B"
-                    HasShadow="False">
+                            Padding="18"
+                            Margin="0,5"
+                            CornerRadius="14"
+                            BackgroundColor="#111827"
+                            BorderColor="#1E293B"
+                            HasShadow="False">  
 
                             <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10">
 
                                 <Label
-                            Text="{Binding Nome}"
-                            TextColor="White"
-                            FontSize="16"
-                            VerticalOptions="Center"/>
+                                    Text="{Binding Nome}"
+                                    TextColor="White"
+                                    FontSize="18"
+                                    VerticalOptions="Center"/>
 
                                 <Button
                             Grid.Column="1"
                             Text="▶"
-                            WidthRequest="42"
-                            HeightRequest="42"
-                            CornerRadius="21"
+                            WidthRequest="50"
+                            HeightRequest="50"
+                            CornerRadius="25"
                             BackgroundColor="#4ADE80"
                             TextColor="#0B0F19"
                             FontSize="16"
@@ -106,9 +115,9 @@
                                 <Button
                             Grid.Column="2"
                             Text="i"
-                            WidthRequest="42"
-                            HeightRequest="42"
-                            CornerRadius="21"
+                            WidthRequest="50"
+                            HeightRequest="50"
+                            CornerRadius="25"
                             BackgroundColor="#1E293B"
                             TextColor="White"
                             FontSize="15"
@@ -122,72 +131,77 @@
         </Grid>
 
         <!-- TREINANDO AGORA -->
-        <VerticalStackLayout
-        Grid.Column="1"
-        BackgroundColor="#111827"
-        Padding="14"
-        Spacing="14">
+        <Grid
+    Grid.Column="{OnIdiom Phone=1, Tablet=1, Desktop=1}"
+    Grid.Row="0"
+    BackgroundColor="#111827"
+    Padding="20"
+    RowDefinitions="Auto,*"
+    RowSpacing="14">
 
             <Label
-            Text="Treinando agora"
-            FontSize="20"
-            TextColor="White"
-            FontAttributes="Bold"/>
+        Grid.Row="0"
+        Text="Treinando agora"
+        FontSize="20"
+        TextColor="White"
+        FontAttributes="Bold"/>
 
             <CollectionView
-            x:Name="ListaAlunosTreinando"
-            ItemsSource="{Binding AlunosTreinando}"
-            SelectionMode="Single"
-            SelectionChanged="SelecionarAlunoTreinando">
+        Grid.Row="1"
+        x:Name="ListaAlunosTreinando"
+        ItemsSource="{Binding AlunosTreinando}"
+        SelectionMode="Single"
+        SelectionChanged="SelecionarAlunoTreinando">
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
 
                         <Frame
-                        Padding="12"
-                        Margin="0,5"
-                        CornerRadius="14"
-                        BackgroundColor="#0F172A"
-                        BorderColor="#1E293B"
-                        HasShadow="False">
+                    Padding="12"
+                    Margin="0,5"
+                    CornerRadius="14"
+                    BackgroundColor="#0F172A"
+                    BorderColor="#1E293B"
+                    HasShadow="False">
 
-                            <Grid ColumnDefinitions="*,Auto,Auto">
+                            <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8">
 
                                 <VerticalStackLayout Spacing="2">
                                     <Label
-                                    Text="{Binding Nome}"
-                                    TextColor="White"
-                                    FontSize="16"
-                                    FontAttributes="Bold"/>
+                                Text="{Binding Nome}"
+                                TextColor="White"
+                                FontSize="16"
+                                FontAttributes="Bold"/>
 
                                     <Label
-                                    Text="Em treino"
-                                    TextColor="#9CA3AF"
-                                    FontSize="12"/>
+                                Text="Em treino"
+                                TextColor="#9CA3AF"
+                                FontSize="12"/>
                                 </VerticalStackLayout>
-                                <Button
-    Grid.Column="1"
-    Text="Ver"
-    WidthRequest="26"
-    HeightRequest="26"
-    CornerRadius="13"
-    FontSize="10"
-    Padding="0"
-    BackgroundColor="#4ADE80"
-    TextColor="#0B0F19"
-    Clicked="AbrirFichaAluno"/>
 
                                 <Button
-    Grid.Column="2"
-    Text="X"
-    WidthRequest="26"
-    HeightRequest="26"
-    CornerRadius="13"
-    FontSize="10"
-    Padding="0"
-    BackgroundColor="#EF4444"
-    TextColor="White"
-    Clicked="RemoverAlunoTreinando"/>
+                            Grid.Column="1"
+                            Text="Ver"
+                            WidthRequest="48"
+                            HeightRequest="48"
+                            CornerRadius="24"
+                            FontSize="14"
+                            Padding="0"
+                            BackgroundColor="#4ADE80"
+                            TextColor="#0B0F19"
+                            Clicked="AbrirFichaAluno"/>
+
+                                <Button
+                            Grid.Column="2"
+                            Text="X"
+                            WidthRequest="48"
+                            HeightRequest="48"
+                            CornerRadius="24"
+                            FontSize="14"
+                            Padding="0"
+                            BackgroundColor="#EF4444"
+                            TextColor="White"
+                            Clicked="RemoverAlunoTreinando"/>
 
                             </Grid>
 
@@ -198,12 +212,12 @@
 
             </CollectionView>
 
-        </VerticalStackLayout>
-
+        </Grid>
         <!-- ÁREA PRINCIPAL -->
         <ScrollView
             Grid.Column="2"
-            IsVisible="{Binding NaoEhCelular}">
+            Grid.Row="0"
+            IsVisible="{Binding NaoEhCelular}"> 
             <VerticalStackLayout
                 Padding="25"
                 Spacing="20">

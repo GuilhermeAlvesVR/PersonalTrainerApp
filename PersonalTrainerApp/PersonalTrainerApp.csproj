@@ -49,6 +49,7 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
+		<MauiIcon Include="Resources\AppIcon\appicon.png" />
 
 		<!-- Splash Screen -->
 		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
@@ -76,10 +77,6 @@
 	<ItemGroup>
 	  <Folder Include="Data\" />
 	  <Folder Include="ViewModels\" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<MauiIcon Include="Resources\AppIcon\appicon.jpeg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -129,6 +126,12 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </None>
 	  <None Update="Views\AlunoDetalhesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </None>
+	  <None Update="Views\EditarAlunoPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </None>
+	  <None Update="Views\FichaTreinoPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </None>
 	  <None Update="Views\HistoricoAvaliacoesPage.xaml">

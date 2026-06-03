@@ -1,4 +1,5 @@
 namespace PersonalTrainerApi
+
 {
     public class WeatherForecast
     {
