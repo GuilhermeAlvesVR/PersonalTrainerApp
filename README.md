@@ -5,7 +5,7 @@ Aplicativo mobile desenvolvido em **.NET MAUI** para gerenciamento de alunos, tr
 ## Demonstração
 
 <p align="center">
-  <img src="images/personal-trainer-demo.gif" alt="Demonstração do Personal Trainer App" width="300">
+  <img src="PersonalTrainerApp/images/personal-trainer-demo.gif" alt="Demonstração do Personal Trainer App" width="350">
 </p>
 
 ## Sobre o Projeto
