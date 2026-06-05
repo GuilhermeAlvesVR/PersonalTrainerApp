@@ -31,6 +31,19 @@ body {
   top: 0;
   z-index: 5;
 }
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.brand-logo {
+  width: 58px;
+  height: 58px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid var(--green);
+  background: #fff;
+}
 .topbar h1 { margin: 0; font-size: 24px; }
 .topbar p, .panel-header p { margin: 4px 0 0; color: var(--muted); }
 .tabs { display: flex; gap: 8px; }
@@ -136,6 +149,7 @@ label.full, .check { grid-column: 1 / -1; }
 
 @media (max-width: 900px) {
   .topbar, .panel-header, .detail-header { align-items: stretch; flex-direction: column; }
+  .brand { align-items: center; }
   .layout, .columns, .cards-grid, .form-grid { grid-template-columns: 1fr; }
   .sidebar { order: 1; }
   .exercise-row { grid-template-columns: 1fr 1fr; }
