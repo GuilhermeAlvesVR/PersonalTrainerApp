@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Studio Personal Trainer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>Studio Tatiane Oliveira</h1>
+      <p>Gestao de alunos, treinos, avaliacoes e agenda</p>
+    </div>
+    <nav class="tabs" aria-label="Navegacao principal">
+      <button class="tab active" data-view="alunos">Alunos</button>
+      <button class="tab" data-view="agenda">Agenda</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="status" class="status hidden"></section>
+
+    <section id="alunosView" class="view active">
+      <div class="layout">
+        <aside class="panel sidebar">
+          <div class="panel-header">
+            <h2>Alunos</h2>
+            <button id="novoAlunoBtn" class="primary">Novo</button>
+          </div>
+          <input id="buscaAluno" class="input" placeholder="Buscar aluno">
+          <div class="filters">
+            <button class="filter active" data-filter="todos">Todos</button>
+            <button class="filter" data-filter="ativos">Ativos</button>
+            <button class="filter" data-filter="inativos">Inativos</button>
+          </div>
+          <div id="listaAlunos" class="student-list"></div>
+        </aside>
+
+        <section class="panel content-panel">
+          <div id="emptyState" class="empty-state">
+            <h2>Selecione um aluno</h2>
+            <p>Escolha um aluno na lista ou cadastre um novo.</p>
+          </div>
+
+          <div id="alunoDetalhe" class="hidden">
+            <div class="detail-header">
+              <div>
+                <h2 id="detalheNome"></h2>
+                <p id="detalheResumo"></p>
+              </div>
+              <div class="actions">
+                <button id="editarAlunoBtn">Editar</button>
+                <button id="excluirAlunoBtn" class="danger">Excluir</button>
+              </div>
+            </div>
+
+            <div class="cards-grid">
+              <div class="mini-card"><span>Peso</span><strong id="detalhePeso">-</strong></div>
+              <div class="mini-card"><span>Altura</span><strong id="detalheAltura">-</strong></div>
+              <div class="mini-card"><span>Ultimo treino</span><strong id="detalheUltimoTreino">-</strong></div>
+              <div class="mini-card"><span>Status</span><strong id="detalheAtivo">-</strong></div>
+            </div>
+
+            <div class="columns">
+              <section class="subpanel">
+                <div class="panel-header compact">
+                  <h3>Treinos</h3>
+                  <button id="novoTreinoBtn" class="primary">Novo treino</button>
+                </div>
+                <div id="listaTreinos" class="stack"></div>
+              </section>
+
+              <section class="subpanel">
+                <div class="panel-header compact">
+                  <h3>Avaliacoes</h3>
+                  <button id="novaAvaliacaoBtn" class="primary">Nova avaliacao</button>
+                </div>
+                <div id="listaAvaliacoes" class="stack"></div>
+              </section>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section id="agendaView" class="view">
+      <section class="panel">
+        <div class="panel-header">
+          <div>
+            <h2>Agenda semanal</h2>
+            <p>Edite horarios e alunos. Clique em um aluno para destacar todas as aulas dele.</p>
+          </div>
+          <div class="actions">
+            <button id="limparDestaqueAgendaBtn">Limpar destaque</button>
+            <button id="salvarAgendaBtn" class="primary">Salvar agenda</button>
+          </div>
+        </div>
+        <div id="agendaTabela" class="agenda-wrap"></div>
+      </section>
+    </section>
+  </main>
+
+  <dialog id="alunoDialog" class="modal">
+    <form id="alunoForm" method="dialog" class="modal-card">
+      <h2 id="alunoDialogTitulo">Aluno</h2>
+      <input type="hidden" id="alunoId">
+      <div class="form-grid">
+        <label>Nome<input id="alunoNome" required></label>
+        <label>Idade<input id="alunoIdade" type="number" min="0"></label>
+        <label>Peso<input id="alunoPeso" type="number" step="0.01" min="0"></label>
+        <label>Altura<input id="alunoAltura" type="number" step="0.01" min="0"></label>
+        <label class="full">Objetivo<input id="alunoObjetivo"></label>
+        <label class="full">Observacoes<textarea id="alunoObservacoes"></textarea></label>
+        <label class="check"><input id="alunoAtivo" type="checkbox"> Aluno ativo</label>
+      </div>
+      <div class="modal-actions">
+        <button type="button" data-close>Cancelar</button>
+        <button class="primary" value="default">Salvar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="treinoDialog" class="modal">
+    <form id="treinoForm" method="dialog" class="modal-card wide">
+      <h2 id="treinoDialogTitulo">Treino</h2>
+      <input type="hidden" id="treinoId">
+      <div class="form-grid">
+        <label>Letra<input id="treinoLetra" maxlength="2" required></label>
+        <label>Nome do treino<input id="treinoNome" required></label>
+      </div>
+      <div class="panel-header compact exercise-title">
+        <h3>Exercicios</h3>
+        <button id="adicionarExercicioBtn" type="button">Adicionar exercicio</button>
+      </div>
+      <div id="exerciciosEditor" class="exercise-editor"></div>
+      <div class="modal-actions">
+        <button type="button" data-close>Cancelar</button>
+        <button class="primary" value="default">Salvar treino</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="avaliacaoDialog" class="modal">
+    <form id="avaliacaoForm" method="dialog" class="modal-card">
+      <h2>Nova avaliacao</h2>
+      <div class="form-grid">
+        <label>Peso<input id="avPeso" type="number" step="0.01" min="0"></label>
+        <label>Peito<input id="avPeito" type="number" step="0.01" min="0"></label>
+        <label>Cintura<input id="avCintura" type="number" step="0.01" min="0"></label>
+        <label>Abdomen<input id="avAbdomen" type="number" step="0.01" min="0"></label>
+        <label>Quadril<input id="avQuadril" type="number" step="0.01" min="0"></label>
+        <label>Braco<input id="avBraco" type="number" step="0.01" min="0"></label>
+        <label>Coxa<input id="avCoxa" type="number" step="0.01" min="0"></label>
+        <label class="full">Observacoes<textarea id="avObservacoes"></textarea></label>
+      </div>
+      <div class="modal-actions">
+        <button type="button" data-close>Cancelar</button>
+        <button class="primary" value="default">Salvar avaliacao</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>

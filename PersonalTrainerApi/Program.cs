@@ -5,6 +5,17 @@ using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("WebApp", policy =>
+    {
+        policy
+            .AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
@@ -49,6 +60,8 @@ using (var scope = app.Services.CreateScope())
 
 app.UseSwagger();
 app.UseSwaggerUI();
+
+app.UseCors("WebApp");
 
 app.UseAuthorization();
 
