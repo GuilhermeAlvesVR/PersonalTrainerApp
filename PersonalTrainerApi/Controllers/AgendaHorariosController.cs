@@ -20,8 +20,7 @@ public class AgendaHorariosController : ControllerBase
     public async Task<ActionResult<List<AgendaHorario>>> Get()
     {
         var horarios = await _context.AgendaHorarios
-            .OrderBy(h => h.DiaSemana)
-            .ThenBy(h => h.Horario)
+            .OrderBy(h => h.Id)
             .ToListAsync();
 
         return Ok(horarios);

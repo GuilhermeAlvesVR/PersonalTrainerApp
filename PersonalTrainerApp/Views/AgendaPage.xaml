@@ -17,7 +17,7 @@
                     TextColor="White"/>
 
                 <Label
-                    Text="Edite os nomes por dia e horário. Cada célula aceita várias linhas."
+                    Text="Planilha semanal de horários. Arraste para o lado para ver todos os horários."
                     FontSize="13"
                     TextColor="#9CA3AF"/>
             </VerticalStackLayout>
@@ -33,13 +33,16 @@
         </Grid>
 
         <Grid Grid.Row="1" ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10">
-            <Picker
-                x:Name="DiasPicker"
-                Title="Dia da semana"
-                BackgroundColor="#0B0F19"
+            <Button
+                x:Name="LimparDestaqueButton"
+                Grid.Column="0"
+                Text="Limpar destaque"
+                BackgroundColor="#374151"
                 TextColor="White"
-                TitleColor="#9CA3AF"
-                SelectedIndexChanged="SelecionarDia"/>
+                Clicked="LimparDestaque"
+                IsVisible="False"
+                HeightRequest="42"
+                CornerRadius="21"/>
 
             <Button
                 Grid.Column="1"
@@ -60,42 +63,13 @@
                 CornerRadius="21"/>
         </Grid>
 
-        <CollectionView
-            x:Name="AgendaCollection"
+        <ScrollView
             Grid.Row="2"
-            SelectionMode="None">
-
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Border
-                        BackgroundColor="#0B0F19"
-                        Stroke="#1F2937"
-                        StrokeThickness="1"
-                        Padding="12"
-                        Margin="0,5"
-                        StrokeShape="RoundRectangle 14">
-
-                        <Grid ColumnDefinitions="80,*" ColumnSpacing="12">
-                            <Label
-                                Text="{Binding Horario}"
-                                FontSize="18"
-                                FontAttributes="Bold"
-                                TextColor="#4ADE80"
-                                VerticalOptions="Start"/>
-
-                            <Editor
-                                Grid.Column="1"
-                                Text="{Binding Conteudo, Mode=TwoWay}"
-                                AutoSize="TextChanges"
-                                MinimumHeightRequest="72"
-                                BackgroundColor="#111827"
-                                TextColor="White"
-                                Placeholder="Livre"
-                                PlaceholderColor="#6B7280"/>
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+            Orientation="Both">
+            <Grid
+                x:Name="AgendaGrid"
+                RowSpacing="6"
+                ColumnSpacing="6"/>
+        </ScrollView>
     </Grid>
 </ContentPage>
