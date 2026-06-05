@@ -21,4 +21,6 @@ public class AppDbContext : DbContext
     public DbSet<Exercicio> Exercicios => Set<Exercicio>();
 
     public DbSet<AvaliacaoFisica> AvaliacoesFisicas => Set<AvaliacaoFisica>();
+
+    public DbSet<AgendaHorario> AgendaHorarios => Set<AgendaHorario>();
 }

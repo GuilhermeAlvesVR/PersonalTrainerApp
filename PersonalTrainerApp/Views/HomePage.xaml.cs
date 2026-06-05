@@ -333,6 +333,11 @@ public partial class HomePage : ContentPage
         }
     }
 
+    private async void AbrirAgenda(object sender, EventArgs e)
+    {
+        await Navigation.PushModalAsync(new AgendaPage(_apiService));
+    }
+
     private async void AdicionarAlunoTreinando(object sender, EventArgs e)
     {
         if (sender is not Button button)

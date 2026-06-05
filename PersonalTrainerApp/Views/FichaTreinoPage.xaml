@@ -31,13 +31,14 @@
                 x:Name="MensagemSucesso"
                 IsVisible="False"
                 BackgroundColor="#2E7D32"
-                CornerRadius="10"
-                Padding="12">
+                CornerRadius="8"
+                Padding="8,4"
+                HorizontalOptions="Start">
 
                 <Label
                     Text="Treino salvo."
                     TextColor="White"
-                    FontSize="14"/>
+                    FontSize="12"/>
             </Frame>
 
             <Frame
@@ -46,100 +47,130 @@
                 BorderColor="#1F2937"
                 BackgroundColor="#0B0F19"
                 HasShadow="True">
-
-                <VerticalStackLayout Spacing="18">
-
-                    <Label
-                        Text="{Binding AlunoSelecionadoAtual.Nome}"
-                        FontSize="26"
-                        FontAttributes="Bold"
-                        TextColor="White"/>
-
-                    <Label
-                        Text="{Binding AlunoSelecionadoAtual.TreinoSelecionado.NomeTreino}"
-                        FontSize="17"
-                        TextColor="#9CA3AF"/>
-
-                    <Border
-                        BackgroundColor="#111827"
-                        Stroke="#1F2937"
-                        StrokeThickness="1"
-                        Padding="10"
-                        StrokeShape="RoundRectangle 12">
-
-                        <VerticalStackLayout Spacing="3">
-                            <Label
-                                Text="Último treino"
-                                FontSize="11"
-                                TextColor="#9CA3AF"/>
+                    <VerticalStackLayout Spacing="18">
+                        <VerticalStackLayout Spacing="4">
 
                             <Label
-                                Text="{Binding AlunoSelecionadoAtual.UltimoTreinoRealizado}"
-                                FontSize="15"
-                                TextColor="#4ADE80"
-                                FontAttributes="Bold"/>
+                                Text="{Binding AlunoSelecionadoAtual.Nome}"
+                                FontSize="26"
+                                FontAttributes="Bold"
+                                TextColor="White"
+                                MaxLines="1"
+                                LineBreakMode="TailTruncation"/>
+
+                            <Label
+                                Text="{Binding AlunoSelecionadoAtual.TreinoSelecionado.NomeTreino}"
+                                FontSize="17"
+                                TextColor="#9CA3AF"
+                                MaxLines="1"
+                                LineBreakMode="TailTruncation"/>
+
                         </VerticalStackLayout>
-                    </Border>
 
-                    <HorizontalStackLayout Spacing="10">
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                            <Border
+                                Grid.Column="0"
+                                WidthRequest="80"
+                                HeightRequest="45"
+                                BackgroundColor="#111827"
+                                Stroke="#1F2937"
+                                StrokeThickness="1"
+                                StrokeShape="RoundRectangle 12"
+                                VerticalOptions="Center">
+
+                                <Label
+                                    Text="{Binding AlunoSelecionadoAtual.UltimoTreinoRealizado}"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    HorizontalTextAlignment="Center"
+                                    FontSize="18"
+                                    FontAttributes="Bold"
+                                    TextColor="#4ADE80"/>
+
+                            </Border>
+
+                            <Button
+                                Grid.Column="2"
+                                Text="Editar"
+                                BackgroundColor="#4ADE80"
+                                TextColor="#0B0F19"
+                                Clicked="EditarTreino"
+                                WidthRequest="90"
+                                HeightRequest="45"
+                                CornerRadius="22"
+                                VerticalOptions="Center"/>
+
+                        </Grid>
+
+                    <Grid
+                        ColumnDefinitions="Auto,Auto,Auto,Auto,*,Auto"
+                        ColumnSpacing="10">
 
                         <Button
+                            Grid.Column="0"
                             Text="A"
-                            WidthRequest="42"
-                            HeightRequest="42"
-                            CornerRadius="21"
-                            FontSize="14"
+                            WidthRequest="56"
+                            HeightRequest="56"
+                            MinimumWidthRequest="56"
+                            MinimumHeightRequest="56"
+                            CornerRadius="28"
+                            FontSize="18"
                             Padding="0"
                             Clicked="SelecionarTreinoA"
                             IsVisible="{Binding AlunoSelecionadoAtual.TemTreinoA}"/>
 
                         <Button
+                            Grid.Column="1"
                             Text="B"
-                            WidthRequest="42"
-                            HeightRequest="42"
-                            CornerRadius="21"
-                            FontSize="14"
+                            WidthRequest="56"
+                            HeightRequest="56"
+                            MinimumWidthRequest="56"
+                            MinimumHeightRequest="56"
+                            CornerRadius="28"
+                            FontSize="18"
                             Padding="0"
                             Clicked="SelecionarTreinoB"
                             IsVisible="{Binding AlunoSelecionadoAtual.TemTreinoB}"/>
 
                         <Button
+                            Grid.Column="2"
                             Text="C"
-                            WidthRequest="42"
-                            HeightRequest="42"
-                            CornerRadius="21"
-                            FontSize="14"
+                            WidthRequest="56"
+                            HeightRequest="56"
+                            MinimumWidthRequest="56"
+                            MinimumHeightRequest="56"
+                            CornerRadius="28"
+                            FontSize="18"
                             Padding="0"
                             Clicked="SelecionarTreinoC"
                             IsVisible="{Binding AlunoSelecionadoAtual.TemTreinoC}"/>
 
                         <Button
+                            Grid.Column="3"
                             Text="D"
-                            WidthRequest="42"
-                            HeightRequest="42"
-                            CornerRadius="21"
-                            FontSize="14"
+                            WidthRequest="56"
+                            HeightRequest="56"
+                            MinimumWidthRequest="56"
+                            MinimumHeightRequest="56"
+                            CornerRadius="28"
+                            FontSize="18"
                             Padding="0"
                             Clicked="SelecionarTreinoD"
                             IsVisible="{Binding AlunoSelecionadoAtual.TemTreinoD}"/>
 
                         <Button
+                            Grid.Column="5"
                             Text="Salvar"
                             Clicked="SalvarTreinoFeito"
                             BackgroundColor="#166534"
                             TextColor="White"
                             WidthRequest="90"
-                            HeightRequest="42"
-                            CornerRadius="21"/>
-                    </HorizontalStackLayout>
+                            HeightRequest="56"
+                            CornerRadius="28"/>
 
-                    <Button
-                        Text="Editar treino"
-                        BackgroundColor="#4ADE80"
-                        TextColor="#0B0F19"
-                        Clicked="EditarTreino"
-                        HeightRequest="45"
-                        CornerRadius="22"/>
+                    </Grid>
+
+                    
 
                     <VerticalStackLayout
                         IsVisible="{Binding AlunoSelecionadoAtual.TemTreino}"

@@ -204,6 +204,20 @@ public class ApiService
 
         return response.IsSuccessStatusCode;
     }
+
+    public async Task<List<AgendaHorario>> GetAgendaHorariosAsync()
+    {
+        return await _httpClient.GetFromJsonAsync<List<AgendaHorario>>("api/AgendaHorarios")
+            ?? new List<AgendaHorario>();
+    }
+
+    public async Task<bool> SalvarAgendaHorariosAsync(List<AgendaHorario> horarios)
+    {
+        var response = await _httpClient.PutAsJsonAsync("api/AgendaHorarios", horarios);
+
+        return response.IsSuccessStatusCode;
+    }
+
     public async Task<Aluno?> AtualizarAlunoAsync(Aluno aluno)
     {
         var alunoApi = new AlunoApiDto

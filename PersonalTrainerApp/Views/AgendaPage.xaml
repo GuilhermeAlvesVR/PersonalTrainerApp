@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="PersonalTrainerApp.Views.AgendaPage"
+    Title="Agenda"
+    BackgroundColor="#111827">
+
+    <Grid RowDefinitions="Auto,Auto,*" Padding="18" RowSpacing="14">
+
+        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+            <VerticalStackLayout Spacing="2">
+                <Label
+                    Text="Agenda de horários"
+                    FontSize="24"
+                    FontAttributes="Bold"
+                    TextColor="White"/>
+
+                <Label
+                    Text="Edite os nomes por dia e horário. Cada célula aceita várias linhas."
+                    FontSize="13"
+                    TextColor="#9CA3AF"/>
+            </VerticalStackLayout>
+
+            <Button
+                Grid.Column="1"
+                Text="Fechar"
+                BackgroundColor="#1F2937"
+                TextColor="White"
+                Clicked="Fechar"
+                HeightRequest="42"
+                CornerRadius="21"/>
+        </Grid>
+
+        <Grid Grid.Row="1" ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10">
+            <Picker
+                x:Name="DiasPicker"
+                Title="Dia da semana"
+                BackgroundColor="#0B0F19"
+                TextColor="White"
+                TitleColor="#9CA3AF"
+                SelectedIndexChanged="SelecionarDia"/>
+
+            <Button
+                Grid.Column="1"
+                Text="Importar Excel"
+                BackgroundColor="#1F2937"
+                TextColor="White"
+                Clicked="ImportarExcel"
+                HeightRequest="42"
+                CornerRadius="21"/>
+
+            <Button
+                Grid.Column="2"
+                Text="Salvar"
+                BackgroundColor="#4ADE80"
+                TextColor="#0B0F19"
+                Clicked="Salvar"
+                HeightRequest="42"
+                CornerRadius="21"/>
+        </Grid>
+
+        <CollectionView
+            x:Name="AgendaCollection"
+            Grid.Row="2"
+            SelectionMode="None">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border
+                        BackgroundColor="#0B0F19"
+                        Stroke="#1F2937"
+                        StrokeThickness="1"
+                        Padding="12"
+                        Margin="0,5"
+                        StrokeShape="RoundRectangle 14">
+
+                        <Grid ColumnDefinitions="80,*" ColumnSpacing="12">
+                            <Label
+                                Text="{Binding Horario}"
+                                FontSize="18"
+                                FontAttributes="Bold"
+                                TextColor="#4ADE80"
+                                VerticalOptions="Start"/>
+
+                            <Editor
+                                Grid.Column="1"
+                                Text="{Binding Conteudo, Mode=TwoWay}"
+                                AutoSize="TextChanges"
+                                MinimumHeightRequest="72"
+                                BackgroundColor="#111827"
+                                TextColor="White"
+                                Placeholder="Livre"
+                                PlaceholderColor="#6B7280"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>
